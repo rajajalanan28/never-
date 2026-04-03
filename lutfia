@@ -1,4 +1,5 @@
 script_key = "hnQmVUvXAvHyygjudmvuuWgBbNMmVSLp"
+
 getgenv().SailorPieceConfig = getgenv().SailorPieceConfig or {
     OpenChests = {
         "Common Chest",
@@ -38,22 +39,29 @@ getgenv().SailorPieceConfig = getgenv().SailorPieceConfig or {
     },
 }
 
--- Script Luarmor
-while true do
-    local success = pcall(function()
-        loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/1169527463a6fb002d07c345110bc0aa.lua"))()
-    end)
-    if success then break end
-    task.wait(5)
-end
+-- Script Luarmor di thread sendiri
+task.spawn(function()
+    while true do
+        local success, err = pcall(function()
+            loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/1169527463a6fb002d07c345110bc0aa.lua"))()
+        end)
+        if success then break end
+        warn("Luarmor Error: " .. tostring(err))
+        task.wait(5)
+    end
+end)
 
--- Script kamu jalan setelah Luarmor berhasil
-task.wait(2)
+-- Tunggu Luarmor load dulu
+task.wait(3)
 
-while true do
-    local success = pcall(function()
-        loadstring(game:HttpGet("https://siganteng.store/api/script/u/ft_zNWDPY18wtIfu9Gye3SXZZXhzRo8wErHUuiC6gYr-OY"))()
-    end)
-    if success then break end
-    task.wait(5)
-end
+-- Script kamu di thread sendiri
+task.spawn(function()
+    while true do
+        local success, err = pcall(function()
+            loadstring(game:HttpGet("https://siganteng.store/api/script/u/ft_zNWDPY18wtIfu9Gye3SXZZXhzRo8wErHUuiC6gYr-OY"))()
+        end)
+        if success then break end
+        warn("Script Error: " .. tostring(err))
+        task.wait(5)
+    end
+end)
