@@ -4,7 +4,7 @@ task.spawn(function()
     
     getgenv().SailorVIP = {
         Optimization = {
-            Enable = true, -- On/Off seluruh script optimisasi
+            Enable = false, -- On/Off seluruh script optimisasi
             FPSCap = 10,   -- Batasan FPS (contoh: 10, 15, 30, 60)
         },
 
