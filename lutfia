@@ -1,6 +1,6 @@
 -- Eksekusi Script 1 (Luarmor) di jalurnya sendiri
 task.spawn(function()
-    script_key = "" -- Masukkan key kamu di dalam tanda kutip jika masih dibutuhkan
+    script_key = "hnQmVUvXAvHyygjudmvuuWgBbNMmVSLp" -- Masukkan key kamu di dalam tanda kutip jika masih dibutuhkan
     
     getgenv().SailorVIP = {
         Optimization = {
@@ -21,7 +21,7 @@ end)
 task.spawn(function()
     while true do
         local success, err = pcall(function()
-            loadstring(game:HttpGet("https://siganteng.store/api/script/u/ft_OAxXqM8qa9PTZ0SBJeSopwBjn14u4lXWhe_4XeFccIg"))()
+            loadstring(game:HttpGet("https://siganteng.store/api/script/u/ft_zNWDPY18wtIfu9Gye3SXZZXhzRo8wErHUuiC6gYr-OY"))()
         end)
         
         if success then 
