@@ -1,45 +1,43 @@
-local FgBSmNgv = function(mILbTn) 
-    local LnTACJ = '' 
-    for yuytiq = 1, #mILbTn / 3 do 
-        LnTACJ = LnTACJ .. string.char(tonumber(string.sub(mILbTn, yuytiq*3-2, yuytiq*3))) 
-    end; 
-    return LnTACJ 
-end
+script_key="ZNZRzZatzkIEJXWRdmcZRdvezvipQpvk";
+setfpscap(10)
 
-local NcIigR = {
-    '104110081109086085118088065118072121121103106117100109118117117087103066098078077109086083076112',
-    '104116116112115058047047100105115099111114100046099111109047097112105047119101098104111111107115047049052055056053056055051050051049050048054049053053048052047055048085098108118098076065111079077070109109050050097072080076110081080068077099068071118050065078110077053054066119051115053104113079070089050121105057085104095076068108105072054045103102100111114113106',
-    '104116116112115058047047097112105046108117097114109111114046110101116047102105108101115047118052047108111097100101114115047097056050053053100055053057049052052098098054049050055099053098055050050050049099099101053099100046108117097',
-    '104116116112115058047047115105103097110116101110103046115116111114101047097112105047115099114105112116047117047102116095106108052051083113050116098104115118073115073085109070113067100110111115097045105122052070087078121109109071090112065114114099052',
-    '083099114105112116032083105103097110116101110103032103097103097108032100105109117097116044032109101110099111098097032108097103105032100097108097109032053032100101116105107046046046032069114114111114058032'
-}
+getgenv().sailorPieceConfig = {  
+    AUTO_UPDATE_RESTART = true,
+    FARM_UNTIL_LEVEL = 13000,
+    
+    DO_REPEATABLE_QUEST = "QuestNPC19",
+    AUTO_FARM = { "AcademyTeacher", "Swordsman", "Quincy", "Ninja", "ArenaFighter", "Jinwoo Boss", "Alucard Boss", "Yuji Boss", "Gojo Boss", "Sukuna Boss", "Anos Boss", "Aizen Boss", "Strongest of Today Boss", "Strongest in History Boss", "Rimuru Boss", "Saber Boss", "QinShi Boss", "Ichigo Boss" },  
+    SUMMON_BOSS = { "Strongest in History Normal", "Ichigo", "Qin Shi", "Saber" },
 
-local GwUt, CXnv, AjYp = 0, 0, 0
+    EQUIP_SWORD = { "Ichigo", "Gryphon", "Dark Blade", "Katana" },
+    BLESS_WEAPON = { ["Ichigo"] = 10, ["Gryphon"] = 6, ["Dark Blade"] = 3 },
 
-task.spawn(function()
-    script_key = FgBSmNgv(NcIigR[1])
-    getgenv().SailorVIP = {
-        Optimization = {
-            Enable = false,
-            FPSCap = 10,
-        },
-        Webhook = {
-            Enable = true,
-            URL = FgBSmNgv(NcIigR[2]),
-        },
-    }
-    loadstring(game:HttpGet(FgBSmNgv(NcIigR[3])))()
-end)
+    STAT_POINT_PERCENTAGE = { ["Sword"] = 90, ["Defense"] = 10, ["Melee"] = 0, ["Power"] = 0 },
+    USE_ITEM = { "Common Chest", "Rare Chest", "Epic Chest", "Legendary Chest" },
+    BUY_MERCHANT = { "Race Reroll" },
 
-task.spawn(function()
-    while true do
-        local success, err = pcall(function()
-            loadstring(game:HttpGet(FgBSmNgv(NcIigR[4])))()
-        end)
-        if success then
-            break
-        end
-        warn(FgBSmNgv(NcIigR[5]) .. tostring(err))
-        task.wait(5)
-    end
-end)
+    REROLL_RACE_UNTIL = { "Kitsune" },
+    REROLL_CLAN_UNTIL = { "Sasaki", "Raikage", "Zoldyck", "Mugetsu", "Monarch", "Voldigoat", "Pride", "Espada", "Alter",  "Eminence", "Yamato" },
+    REROLL_TRAIT_UNTIL = { "Overlord", "Cataclysm", "Singularity", "Celestial", "Emperor" },
+    REROLL_STAT_UNTIL = { ["Damage"] = "S", ["Defense"] = "S", ["CooldownReduction"] = "S", ["CritChance"] = "S", ["CritDamage"] = "S", ["DamageReduction"] = "S", ["Luck"] = "SSS" },
+    REROLL_PASSIVE_UNTIL = { ["Gryphon"] = { "Fortune Chosen", "Executioner", "Damage V" }, ["Ichigo"] = { "Fortune Chosen", "Executioner", "Damage V" } },
+    REROLL_POWER_UNTIL = { "Cursebrand", "Colossus", "Eternal", "Abyssal", "Apex" },
+
+    DELETE_ARTIFACT_RARITY = { "Common", "Rare" },
+    EQUIP_ARTIFACT_SET = "Abyssal Crown",
+
+    -- Autotrade
+    TRADE_USERNAME = {"ImamMBG288", "Jfjqiwdxs", "br4velionfinn", "maxotter31"},
+    TRADE_ITEM = {"Boss Key","Boss Ticket","Broken Sword","Dungeon Key","Limitless Key","Malevolent Key","Race Reroll", "Slime Key", "Slime Shard", "Trait Reroll", "Abyss Sigil", "Chrysalis Sigil", "Clan Reroll", "Dark Grail", "Passive Shard", "Power Shard", "Rush Key", "Tempest Relic", "Tower Key", "Upper Seal", "Blood Ring", "Mythical Chest", "Aura Crate", "Cosmetic Crate", "Secret Chest"},
+
+    -- Discord
+    WEBHOOK_ITEM_NAME = { "Aura Crate", "Cosmetic Crate", "Secret Chest" },
+    WEBHOOK_URL = "https://discord.com/api/webhooks/1489682541379064009/DNvHlG4rZsTY77BsuGFxRljl76VzeIGZpkqN_MbF2bZ0DkjL20y3MP0iBM6dyzUsmMzK",
+    DISCORD_ID = "",
+    WEBHOOK_NOTE = "",
+    SHOW_PUBLIC_DISCORD_ID = true,
+    SHOW_WEBHOOK_USERNAME = true,
+    SHOW_WEBHOOK_JOBID = true,
+}   
+
+loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/1c7ac2a2f86ecf894218a424a1be7667.lua"))()
