@@ -1,0 +1,173 @@
+-- 💠 KxK HUB | Ultimate UI (FULL LIVE DATA + ANDROID FIX) 💠
+local CoreGui = game:GetService("CoreGui")
+local Players = game:GetService("Players")
+local LP = Players.LocalPlayer
+
+-- 1. CLEANUP
+if CoreGui:FindFirstChild("KxK_UltimateUI") then CoreGui:FindFirstChild("KxK_UltimateUI"):Destroy() end
+if CoreGui:FindFirstChild("KxK_Toggle") then CoreGui:FindFirstChild("KxK_Toggle"):Destroy() end
+
+local sg = Instance.new("ScreenGui", CoreGui)
+sg.Name = "KxK_UltimateUI"
+sg.DisplayOrder = 999999999
+sg.IgnoreGuiInset = true
+
+local MainFrame = Instance.new("Frame", sg)
+MainFrame.Size = UDim2.new(1, 0, 1, 0)
+MainFrame.BackgroundColor3 = Color3.fromRGB(5, 5, 8)
+MainFrame.BackgroundTransparency = 0.1
+
+-- 2. RESPONSIVE CONTAINER
+local Container = Instance.new("Frame", MainFrame)
+Container.Size = UDim2.new(0.6, 0, 0.7, 0) 
+Container.Position = UDim2.new(0.2, 0, 0.15, 0)
+Container.BackgroundColor3 = Color3.fromRGB(15, 15, 20)
+
+local function applyStyle(parent, strokeColor)
+    Instance.new("UICorner", parent).CornerRadius = UDim.new(0, 15)
+    local s = Instance.new("UIStroke", parent)
+    s.Thickness = 2
+    s.Color = strokeColor or Color3.fromRGB(0, 255, 200)
+    s.Transparency = 0.5
+end
+applyStyle(Container)
+
+-- 3. BRANDING
+local Header = Instance.new("Frame", Container)
+Header.Size = UDim2.new(1, 0, 0.2, 0)
+Header.BackgroundTransparency = 1
+
+local Title = Instance.new("TextLabel", Header)
+Title.Size = UDim2.new(1, 0, 0.6, 0)
+Title.Text = "💠 KxK HUB | Ultimate UI 💠"
+Title.TextColor3 = Color3.fromRGB(0, 255, 200)
+Title.TextScaled = true
+Title.Font = Enum.Font.GothamBold
+Title.BackgroundTransparency = 1
+
+local Slogan = Instance.new("TextLabel", Header)
+Slogan.Size = UDim2.new(1, 0, 0.3, 0)
+Slogan.Position = UDim2.new(0, 0, 0.5, 0)
+Slogan.Text = "U N D E R   C O N T R O L"
+Slogan.TextColor3 = Color3.fromRGB(150, 150, 180)
+Slogan.TextScaled = true
+Slogan.Font = Enum.Font.GothamMedium
+Slogan.BackgroundTransparency = 1
+
+-- 4. STATS BOXES
+local function createBox(pos, size, title, color)
+    local b = Instance.new("Frame", Container)
+    b.Size = size
+    b.Position = pos
+    b.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+    applyStyle(b, color or Color3.fromRGB(60, 60, 80))
+    
+    local tl = Instance.new("TextLabel", b)
+    tl.Size = UDim2.new(1, 0, 0.3, 0)
+    tl.Text = title
+    tl.TextColor3 = color or Color3.fromRGB(200, 200, 220)
+    tl.TextScaled = true
+    tl.Font = Enum.Font.GothamBold
+    tl.BackgroundTransparency = 1
+    
+    local val = Instance.new("TextLabel", b)
+    val.Name = "Value"
+    val.Size = UDim2.new(1, -10, 0.6, 0)
+    val.Position = UDim2.new(0, 5, 0.35, 0)
+    val.Text = "..."
+    val.TextColor3 = Color3.fromRGB(255, 255, 255)
+    val.TextScaled = true
+    val.Font = Enum.Font.GothamBold
+    val.BackgroundTransparency = 1
+    return val
+end
+
+local LevelVal = createBox(UDim2.new(0.05, 0, 0.25, 0), UDim2.new(0.43, 0, 0.18, 0), "LEVEL")
+local MoneyVal = createBox(UDim2.new(0.52, 0, 0.25, 0), UDim2.new(0.43, 0, 0.18, 0), "MONEY", Color3.fromRGB(255, 215, 0))
+local GemsVal = createBox(UDim2.new(0.52, 0, 0.45, 0), UDim2.new(0.43, 0, 0.18, 0), "GEMS", Color3.fromRGB(0, 200, 255))
+
+local CharBox = Instance.new("Frame", Container)
+CharBox.Size = UDim2.new(0.43, 0, 0.38, 0)
+CharBox.Position = UDim2.new(0.05, 0, 0.45, 0)
+CharBox.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+applyStyle(CharBox, Color3.fromRGB(150, 150, 255))
+
+local StatsLabel = Instance.new("TextLabel", CharBox)
+StatsLabel.Size = UDim2.new(1, -20, 1, -10)
+StatsLabel.Position = UDim2.new(0, 10, 0, 5)
+StatsLabel.Text = "Race: ...\nTrait: ...\nClan: ..."
+StatsLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
+StatsLabel.TextScaled = true
+StatsLabel.Font = Enum.Font.GothamMedium
+StatsLabel.TextXAlignment = Enum.TextXAlignment.Left
+StatsLabel.BackgroundTransparency = 1
+
+local TimerText = Instance.new("TextLabel", Container)
+TimerText.Size = UDim2.new(0.9, 0, 0.12, 0)
+TimerText.Position = UDim2.new(0.05, 0, 0.85, 0)
+TimerText.Text = "⏰ 00h 00m 00s"
+TimerText.TextColor3 = Color3.fromRGB(0, 255, 200)
+TimerText.TextScaled = true
+TimerText.Font = Enum.Font.GothamBold
+TimerText.BackgroundTransparency = 1
+
+-- 5. COMPACT TOGGLE (Right Bottom)
+local tgl = Instance.new("ScreenGui", CoreGui)
+tgl.Name = "KxK_Toggle"
+tgl.DisplayOrder = 1000000000
+local btn = Instance.new("TextButton", tgl)
+btn.Size = UDim2.new(0, 90, 0, 35)
+btn.Position = UDim2.new(1, -100, 1, -50)
+btn.BackgroundColor3 = Color3.fromRGB(0, 255, 180)
+btn.Text = "HIDE UI"
+btn.Font = Enum.Font.GothamBold
+btn.TextSize = 14
+Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 8)
+
+btn.MouseButton1Click:Connect(function()
+    MainFrame.Visible = not MainFrame.Visible
+    btn.Text = MainFrame.Visible and "HIDE UI" or "SHOW UI"
+    btn.BackgroundColor3 = MainFrame.Visible and Color3.fromRGB(0, 255, 180) or Color3.fromRGB(255, 80, 80)
+end)
+
+-- 6. LIVE DATA ENGINE (FIXED)
+local function format(n)
+    n = tonumber(n) or 0
+    if n >= 1e6 then return string.format("%.2fM", n/1e6) end
+    if n >= 1e3 then return string.format("%.1fK", n/1e3) end
+    return tostring(n)
+end
+
+local start = os.time()
+local data = LP:WaitForChild("Data", 15)
+
+task.spawn(function()
+    while task.wait(0.5) do
+        pcall(function()
+            -- Timer
+            local d = os.time() - start
+            TimerText.Text = string.format("⏰ %02dh %02dm %02ds", math.floor(d/3600), math.floor((d%3600)/60), d%60)
+            
+            -- Stats
+            if data then
+                LevelVal.Text = tostring(data.Level.Value)
+                MoneyVal.Text = "💰 " .. format(data.Money.Value)
+                GemsVal.Text = "💎 " .. tostring(data.Gems.Value)
+            end
+            
+            -- Race/Trait/Clan
+            local race, trait, clan = "Human", "None", "None"
+            local sp = LP.PlayerGui:FindFirstChild("StatsPanelUI")
+            if sp then
+                for _, v in ipairs(sp:GetDescendants()) do
+                    if v:IsA("TextLabel") and v.Name == "StatName" then
+                        if v.Text:find("Race:") then race = v.Text:gsub("Race: ", "") end
+                        if v.Text:find("Trait:") then trait = v.Text:gsub("Trait: ", "") end
+                        if v.Text:find("Clan:") then clan = v.Text:gsub("Clan: ", "") end
+                    end
+                end
+            end
+            StatsLabel.Text = "Race: "..race.."\nTrait: "..trait.."\nClan: "..clan
+        end)
+    end
+end)
