@@ -1,0 +1,129 @@
+-- 🛠️ KxK HUB | Auto Hex Obfuscator Tool 🛠️
+-- Jalankan script ini 1x di executor kamu.
+
+local rawScript = [=[
+if setfpscap then
+    setfpscap(10) 
+end
+
+local Lighting = game:GetService("Lighting")
+local Terrain = workspace:FindFirstChildOfClass("Terrain")
+local LP = game:GetService("Players").LocalPlayer
+
+print("👾 [KxK FPS] Memulai pembantaian visual dan UI...")
+
+-- 1. PEMBANTAIAN CAHAYA
+Lighting.GlobalShadows = false
+Lighting.FogEnd = 9e9
+Lighting.Brightness = 0
+Lighting.ClockTime = 12
+Lighting.Ambient = Color3.fromRGB(200, 200, 200) 
+Lighting.OutdoorAmbient = Color3.fromRGB(200, 200, 200)
+
+for _, v in pairs(Lighting:GetChildren()) do
+    if not v:IsA("Sky") then
+        pcall(function() v:Destroy() end)
+    end
+end
+
+if Terrain then
+    pcall(function()
+        Terrain.WaterWaveSize = 0
+        Terrain.WaterWaveSpeed = 0
+        Terrain.WaterReflectance = 0
+        Terrain.WaterTransparency = 0
+        Terrain.WaterColor = Color3.fromRGB(150, 150, 150)
+    end)
+end
+
+-- 2. FUNGSI INTI: PENCABUTAN 3D & TULISAN MELAYANG
+local function brutalizeObject(v)
+    pcall(function()
+        if v:IsA("BasePart") then
+            v.Material = Enum.Material.SmoothPlastic
+            v.Reflectance = 0
+            v.CastShadow = false
+            v.Color = Color3.fromRGB(200, 200, 200) 
+        end
+        
+        if v:IsA("MeshPart") then
+            v.TextureID = "" 
+        elseif v:IsA("SpecialMesh") then
+            v.TextureId = ""
+            
+        elseif v:IsA("Shirt") or v:IsA("Pants") or v:IsA("ShirtGraphic") or v:IsA("CharacterMesh") or
+               v:IsA("Decal") or v:IsA("Texture") or v:IsA("SurfaceAppearance") or 
+               v:IsA("ParticleEmitter") or v:IsA("Trail") or v:IsA("Fire") or 
+               v:IsA("Smoke") or v:IsA("Sparkles") or v:IsA("SpotLight") or 
+               v:IsA("PointLight") or v:IsA("SurfaceLight") then
+            v:Destroy()
+            
+        elseif v:IsA("BillboardGui") or v:IsA("SurfaceGui") then
+            v.Enabled = false
+        end
+    end)
+end
+
+-- 3. PROSES PENCICILAN MAP
+task.spawn(function()
+    local descendants = workspace:GetDescendants()
+    for i, v in ipairs(descendants) do
+        brutalizeObject(v)
+        if i % 1000 == 0 then
+            task.wait() 
+        end
+    end
+end)
+
+-- 4. CEGATAN SAAT TELEPORT
+workspace.DescendantAdded:Connect(function(v)
+    task.defer(brutalizeObject, v)
+end)
+
+-- 5. ⭐ PEMBANTAIAN UI GAME (PLAYER GUI) ⭐
+task.spawn(function()
+    local PlayerGui = LP:WaitForChild("PlayerGui", 10)
+    if PlayerGui then
+        local function hideUI(gui)
+            pcall(function()
+                if gui:IsA("ScreenGui") then
+                    gui.Enabled = false
+                end
+            end)
+        end
+
+        for _, gui in ipairs(PlayerGui:GetChildren()) do
+            hideUI(gui)
+        end
+
+        PlayerGui.ChildAdded:Connect(hideUI)
+        print("👾 [KxK FPS] Seluruh UI Game berhasil disembunyikan!")
+    end
+end)
+
+print("👾 [KxK FPS] Brutal Potato UI Killer Aktif! Layar bersih, siap AFK berabad-abad.")
+]=]
+
+-- Mesin Encoder Hex
+local function stringToHex(str)
+    local hex = ''
+    for i = 1, #str do
+        hex = hex .. string.format("%02x", string.byte(str, i))
+    end
+    return hex
+end
+
+local hexCode = stringToHex(rawScript)
+
+-- Menggabungkan Hex dengan Decoder andalanmu
+local finalObfuscated = "-- 💠 KxK HUB | Ultimate FPS Boost 💠\nlocal qQnWj = function(RybxO) local qeHhX='' for qXrSp=1,RybxO:len(),2 do qeHhX=qeHhX..string.char(tonumber(RybxO:sub(qXrSp,qXrSp+1),16)) end; return qeHhX end\nloadstring(qQnWj('" .. hexCode .. "'))()"
+
+-- Menyalin langsung ke Clipboard perangkatmu
+if setclipboard then
+    setclipboard(finalObfuscated)
+    print("✅ SUCCESS! Script Obfuscated sudah otomatis di-copy ke Clipboard kamu!")
+    print("Tinggal buka GitHub/Notepad, lalu klik Kanan -> Paste.")
+else
+    warn("❌ Executor tidak support setclipboard. Ini hasil Hex-nya:")
+    print(finalObfuscated)
+end
