@@ -1,0 +1,125 @@
+-- [[ 💠 KxK HUB | TEXT JUMBO + BACKGROUND (ANTI-CRASH) 💠 ]]
+-- Status: Ultra-Light, Split Screen 4 Tab Friendly, Simplified Stats
+
+local _P = game:GetService("Players")
+local _CG = game:GetService("CoreGui")
+local _LP = _P.LocalPlayer
+
+-- 1. BERSIHKAN UI LAMA
+for _, v in ipairs(_CG:GetChildren()) do
+    if v.Name == "KxK_TextUI" or v.Name == "KxK_UltimateUI" or v.Name == "KxK_Toggle" then 
+        v:Destroy() 
+    end
+end
+
+-- 2. BUAT KANVAS
+local _SG = Instance.new("ScreenGui", _CG)
+_SG.Name = "KxK_TextUI"
+_SG.DisplayOrder = 999999
+_SG.IgnoreGuiInset = true
+
+-- 3. BUAT TEKS RAKSASA DENGAN BACKGROUND
+local _TXT = Instance.new("TextLabel", _SG)
+_TXT.Size = UDim2.new(0.9, 0, 0.8, 0) 
+_TXT.Position = UDim2.new(0.05, 0, 0.1, 0) 
+_TXT.BackgroundColor3 = Color3.fromRGB(10, 10, 15) 
+_TXT.BackgroundTransparency = 0.4 
+
+Instance.new("UICorner", _TXT).CornerRadius = UDim.new(0, 15)
+
+_TXT.Font = Enum.Font.GothamBlack 
+_TXT.TextColor3 = Color3.fromRGB(255, 255, 255) 
+_TXT.TextStrokeTransparency = 0 
+_TXT.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+_TXT.TextScaled = true 
+_TXT.TextWrapped = true
+_TXT.TextYAlignment = Enum.TextYAlignment.Center
+_TXT.LineHeight = 1.2
+_TXT.Text = "Loading KxK HUB..." 
+
+-- 4. PENYIMPANAN DATA
+local _START = os.time()
+local _DATA = {
+    Level = "...", Money = "...", Gems = "...",
+    Race = "None", Trait = "None", Clan = "None"
+}
+
+local function _FMT(n)
+    n = tonumber(n) or 0
+    if n >= 1e6 then return string.format("%.2fM", n/1e6) end
+    if n >= 1e3 then return string.format("%.2fK", n/1e3) end
+    return tostring(n)
+end
+
+-- Update Teks (Format Dirapikan biar Simetris)
+local function _UPDATE()
+    local _d = os.time() - _START
+    local _timeStr = string.format("%02dh %02dm %02ds", math.floor(_d/3600), math.floor((_d%3600)/60), _d%60)
+    
+    _TXT.Text = string.format(
+        "Lv: %s | Race: %s\nTrait: %s | Clan: %s\nMoney: %s | Gems: %s\n⏳ %s",
+        _DATA.Level, _DATA.Race, 
+        _DATA.Trait, _DATA.Clan,
+        _DATA.Money, _DATA.Gems,
+        _timeStr
+    )
+end
+
+-- Panggil sekali di awal biar langsung sinkron
+pcall(function()
+    local d = _LP:FindFirstChild("Data")
+    if d then
+        _DATA.Level = tostring(d.Level.Value)
+        _DATA.Money = _FMT(d.Money.Value)
+        _DATA.Gems = tostring(d.Gems.Value)
+    end
+    _UPDATE()
+end)
+
+-- 5. MESIN DATA (Jalan tiap 2 detik)
+task.spawn(function()
+    while task.wait(2) do
+        pcall(function()
+            local d = _LP:FindFirstChild("Data")
+            if d then
+                _DATA.Level = tostring(d.Level.Value)
+                _DATA.Money = _FMT(d.Money.Value)
+                _DATA.Gems = tostring(d.Gems.Value)
+            end
+            _UPDATE()
+        end)
+    end
+end)
+
+-- 6. MESIN KARAKTER (Jalan tiap 15 detik)
+task.spawn(function()
+    while task.wait(15) do
+        pcall(function()
+            local sp = _LP.PlayerGui:FindFirstChild("StatsPanelUI")
+            if sp then
+                for _, x in ipairs(sp:GetDescendants()) do
+                    if x:IsA("TextLabel") then
+                        local txt = x.Text
+                        if txt:find("Race:") then _DATA.Race = txt:gsub("Race: ", "") end
+                        if txt:find("Trait:") then _DATA.Trait = txt:gsub("Trait: ", "") end
+                        if txt:find("Clan:") then _DATA.Clan = txt:gsub("Clan: ", "") end
+                    end
+                end
+            end
+            _UPDATE()
+        end)
+    end
+end)
+
+-- 7. PEMBERSIH NOTIF & QUEST (Tiap 5 detik)
+task.spawn(function()
+    local _bl = {"QuestTrackingUI", "QuestPingUI", "NotificationUI", "QuestUI"}
+    while task.wait(5) do
+        for _, _n in ipairs(_bl) do
+            local _t = _LP.PlayerGui:FindFirstChild(_n)
+            if _t then _t.Enabled = false end
+        end
+    end
+end)
+
+print("💠 KxK HUB: Simplified Jumbo Active! 🚀")
